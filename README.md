@@ -1,27 +1,81 @@
-# FirebaseUi
+<p align="center">
+  <img src="screenshot.png" width="300" title="Screenshot">
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
+## Installation
 
-## Development server
+```
+ng add angular-fire-schematics // skip if you already have angular fire
+npm i ng-firebase-ui // requires peer dependency of firebase firebaseui and @angular/fire
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Add styling
 
-## Code scaffolding
+```
+@import '~firebaseui/dist/firebaseui.css';
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+Add module
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import * as firebase from 'firebase';
+import * as firebaseui from 'firebaseui';
+import { AppComponent } from './app.component';
 
-## Running unit tests
+import { NgFirebaseUiModule } from 'ng-firebase-ui';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+const config: firebaseui.auth.Config = {
+  signInSuccessUrl: '/home',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  ],
+  tosUrl: '/tos',
+  privacyPolicyUrl() {
+    window.location.assign('/tos');
+  }
+};
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    NgFirebaseUiModule.init(config),
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 
-## Further help
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## usage
+
+
+Where you want the firebase ui to display:
+
+```
+<firebase-ui></firebase-ui>
+```
+
+
+Now when the user connects firebase auth will receive an user. So you can have:
+
+```
+  constructor(
+    private afAuth: AngularFireAuth,
+    private router: Router,
+  ) {
+
+    this.user$ = this.afAuth.authState;
+  }
+```

@@ -1,0 +1,13 @@
+{
+  "name": "ng-firebase-ui",
+  "version": "3.0.1",
+  "peerDependencies": {
+    "@angular/fire": "^5.1.2",
+    "firebase": "^5.9.0",
+    "firebaseui": "^3.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cedvdb/angular-firebase-ui"
+  }
+}
