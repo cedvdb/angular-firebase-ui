@@ -1,5 +1,6 @@
 <p align="center">
-  ![screenshot](https://github.com/firebase/firebaseui-web/raw/master/demo/screenshot.png)
+
+![screenshot](https://github.com/firebase/firebaseui-web/raw/master/demo/screenshot.png)
 
 </p>
 
