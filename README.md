@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="screenshot.png" width="300" title="Screenshot">
+  ![screenshot](https://github.com/firebase/firebaseui-web/raw/master/demo/screenshot.png)
+
 </p>
 
 ## Installation
